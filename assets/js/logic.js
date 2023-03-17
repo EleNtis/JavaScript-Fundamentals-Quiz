@@ -37,7 +37,19 @@ function questionClick(){
     feedback.textContent = "Correct!"
     rightSoundEffect.play();
     }
+    
+    feedback.setAttribute("class","feedbackAttr");
 
+    setTimeout(function(){
+        feedback.setAttribute("class","feedbackAttr hide")
+    }, 1000);
+    
+    questionIndex++;
+    if(questionIndex === questions.length){
+        endQuiz()
+    }else {
+        getQuestion();
+    }
 }
 
 function getQuestion(){
