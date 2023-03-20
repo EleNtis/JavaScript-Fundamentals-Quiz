@@ -1,3 +1,5 @@
+
+
 let timeLeft = questions.length * 10;
 let timer;
 let questionIndex = 0;
@@ -8,8 +10,9 @@ let quizQuestions = document.querySelector("#questions");
 let timerInterval = document.querySelector("#time");
 let submitButton = document.querySelector("#submit");
 let quizChoices = document.querySelector("#choices");
-let initials = document.querySelector("#initials");
+let initialsElement = document.querySelector("#initials");
 let feedback = document.querySelector("#feedback");
+
 
 //sound effects variables
 let rightSoundEffect = new Audio ("assets/sfx/correct.wav");
@@ -39,7 +42,7 @@ function questionClick(){
     }
     
     feedback.setAttribute("class","feedbackAttr");
-
+//hide feedback before print the next question
     setTimeout(function(){
         feedback.setAttribute("class","feedbackAttr hide")
     }, 1000);
@@ -69,7 +72,6 @@ function getQuestion(){
 }
 
 
-
 function endQuiz(){
 clearInterval(timer);
 
@@ -77,6 +79,10 @@ let endScreen = document.querySelector("#end-screen");
 endScreen.removeAttribute("class");
 
 quizQuestions.setAttribute("class", "hide");
+//to set the final score to be equal with the time left
+let finalScore = document.querySelector("#final-score");
+finalScore.textContent = timeLeft;
+
 }
  
 
@@ -102,11 +108,31 @@ function startQuiz(){
 }
 
 function saveScore(){
-
+let nameInitials = initialsElement.value.trim();
+if (nameInitials !== ""){
+    let highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+    let newScore = 
+        {
+        score: timeLeft,
+        initials: nameInitials
+    }
+    
+    highScores.push(newScore);
+    localStorage.setItem("highscores", JSON.stringify(highScores));
+    window.location.href = "highscores.html";  
+   
+}
 }
 
-
-
+function checkForEnter(event){
+if(event.key === "Enter"){
+    saveScore();
+}
+}
 
 //events
 startButton.addEventListener("click", startQuiz);
+submitButton.addEventListener("click", saveScore);
+initials.addEventListener("keyup", checkForEnter);
+
+
