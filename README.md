@@ -9,7 +9,7 @@ The app represents a timed coding quiz with multiple-choice questions that store
 
 ## Deployed Website
 
-- Check out the live demo [Quiz-JavaScript-Fundamentals](https://elentis.github.io/JavaScript-Fundamentals-Quiz index.html)
+- Check out the live demo [Quiz-JavaScript-Fundamentals](https://elentis.github.io/JavaScript-Fundamentals-Quiz/index.html)
 
 ## Contents
 
